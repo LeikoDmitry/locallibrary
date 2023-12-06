@@ -8,11 +8,11 @@ from app.service.subscriber import SubscriberService
 
 
 class Subscriber(APIView):
-    service = SubscriberService()
+    subscribe_service = SubscriberService()
 
     def post(self, request):
         serializer = SubscriberSerializer(data=JSONParser().parse(request))
-        self.service.subscribe(serializer)
+        self.subscribe_service.subscribe(serializer)
 
         return Response({
             "details": "Subscriber has been created successfully!",

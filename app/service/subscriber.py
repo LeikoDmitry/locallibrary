@@ -20,7 +20,3 @@ class SubscriberService:
             raise SubscriberFoundError()
 
         Subscriber(email=subscriber_serializer.get_email).save()
-        
-
-
-
