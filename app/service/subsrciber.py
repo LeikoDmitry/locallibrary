@@ -2,6 +2,7 @@ from app.exception.subsrciber import SubscriberFoundException, ValidationError
 from app.models import UserSubscriber as ModelUserSubscriber
 from app.serializer.subsrciber import SubscriberSerializer
 from app.repository.subsrciber import UserSubscriber
+from rest_framework.views import exception_handler
 
 
 class SubscriberUser:
