@@ -1,9 +1,8 @@
-from app.models import UserSubscriber as ModelSubscriber
+from app.models import UserSubscriber as ModelUserSubscriber
 
 
 class UserSubscriber:
-    def __int__(self):
-        self._model_subscriber = ModelSubscriber
+    _model_subscriber = ModelUserSubscriber()
 
-    def find_by_id(self, id: int) -> ModelSubscriber | None:
-        return self._model_subscriber.objects.get(id=id)
+    def find_by_email(self, email: str) -> ModelUserSubscriber | None:
+        return self._model_subscriber.objects.get(email=email)
