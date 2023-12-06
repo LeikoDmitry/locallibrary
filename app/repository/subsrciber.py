@@ -2,7 +2,7 @@ from app.models import UserSubscriber as ModelUserSubscriber
 
 
 class UserSubscriber:
-    _model_subscriber = ModelUserSubscriber()
+    model_subscriber = ModelUserSubscriber
 
     def find_by_email(self, email: str) -> ModelUserSubscriber | None:
-        return self._model_subscriber.objects.get(email=email)
+        return self.model_subscriber.objects.filter(email=email).first()

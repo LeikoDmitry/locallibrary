@@ -1,20 +1,23 @@
-from app.repository.subsrciber import UserSubscriber
-from app.exception.subsrciber import SubscriberFoundException
+from app.exception.subsrciber import SubscriberFoundException, ValidationError
 from app.models import UserSubscriber as ModelUserSubscriber
+from app.serializer.subsrciber import SubscriberSerializer
+from app.repository.subsrciber import UserSubscriber
 
 
 class SubscriberUser:
+    subscriber_repository = UserSubscriber()
 
-    def __int__(self):
-        self.subscriber_repository = UserSubscriber()
+    def subscribe(self, subscriber_serializer: SubscriberSerializer) -> None:
 
-    def subscribe(self, subscriber_request) -> None:
-        subscriber = self.subscriber_repository.find_by_email(subscriber_request.email)
+        if not subscriber_serializer.is_valid():
+            raise ValidationError(subscriber_serializer.errors)
+
+        subscriber = self.subscriber_repository.find_by_email(subscriber_serializer.get_email)
 
         if subscriber:
             raise SubscriberFoundException()
 
-        ModelUserSubscriber(email=subscriber_request.email).save()
+        ModelUserSubscriber(email=subscriber_serializer.get_email).save()
         
 
 
