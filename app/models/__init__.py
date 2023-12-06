@@ -1,2 +1,2 @@
-from .category import BookCategory
-from .subscriber import UserSubscriber
+from app.models.category import BookCategory
+from app.models.subscriber import UserSubscriber
