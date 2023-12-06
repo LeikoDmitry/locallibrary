@@ -1,14 +1,14 @@
 from rest_framework import status
-from rest_framework.exceptions import ValidationError as BaseValidationError
+from rest_framework.exceptions import APIException
 
 
-class SubscriberFoundException(Exception):
-    def __init__(self, message="Subscriber already exist!"):
-        super().__init__(message)
+class SubscriberFoundError(APIException):
+    status_code = status.HTTP_404_NOT_FOUND
+    default_detail = "Subscriber already exist!"
+    default_code = 'not_found'
 
 
-class ValidationError(BaseValidationError):
+class ValidationError(APIException):
     status_code = status.HTTP_422_UNPROCESSABLE_ENTITY
-
-    def __int__(self, detail):
-        super().__init__(detail=detail)
+    default_detail = 'Validation Error'
+    default_code = 'invalid'
