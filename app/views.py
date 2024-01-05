@@ -4,13 +4,16 @@ from rest_framework.response import Response
 
 from app.decorator.subsrciber import SubscriberRequest
 from app.serializer.subsrciber import SubscriberSerializer
+from dependency_injector.wiring import inject, Provide
+from publisher.containers import Container
 from app.service.subscriber import SubscriberService
 
 
 class Subscriber(APIView):
     subscribe_service = None
 
-    def __init__(self, subscribe_service: SubscriberService, **kwargs):
+    @inject
+    def __init__(self, subscribe_service: SubscriberService = Provide[Container.service_subscriber], **kwargs):
         super().__init__(**kwargs)
         self.subscribe_service = subscribe_service
 
